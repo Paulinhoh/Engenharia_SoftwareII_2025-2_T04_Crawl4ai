@@ -31,7 +31,7 @@ def generate_code_embedding(code_text, max_files=20):
     for i, file_data in enumerate(code_text[:max_files], 1):
         code_text = file_data['content'][:512]  # Limite do CodeBERT
 
-        # Tokenizar e gerar embedding
+        # Tokenizer e gerar embedding
         inputs = tokenizer(
             code_text,
             return_tensors="pt",

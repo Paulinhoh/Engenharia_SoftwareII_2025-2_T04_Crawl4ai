@@ -6,6 +6,8 @@ from models.code_search import generate_code_embedding
 REPO_URL = 'https://github.com/unclecode/crawl4ai.git'
 
 
+# talvez utilizar k-means para fazer clusterization dos dados junto do modelo de embedding
+
 def main():
     """Análise completa do repositório"""
     print(f"Analisando: {REPO_URL}")
@@ -23,16 +25,9 @@ def main():
         print("❌ Nenhum arquivo de código encontrado!")
 
     # Análise com os 3 modelos
-    results = {}
-
-    # MODELO 1: Zero-shot
-    results['zero_shot'] = classify_architecture(code_files, len(code_files))
-
-    # MODELO 2: Embeddings
-    results['embeddings'] = calculate_similarity(code_files, len(code_files))
-
-    # MODELO 3: CodeBERT
-    results['codebert'] = generate_code_embedding(code_files, len(code_files))
+    results = {'zero_shot': classify_architecture(code_files),
+               'embeddings': calculate_similarity(code_files),
+               'codebert': generate_code_embedding(code_files)}
 
     # 4. Resumo final
     print_final_summary(results)
